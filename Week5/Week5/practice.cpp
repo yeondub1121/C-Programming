@@ -1,26 +1,41 @@
 #include <iostream>
 using namespace std;
 
-class Circle {
-    int radius;
-
+class Rectangle {
 public:
-    Circle() { radius = 1; }
-    Circle(int radius) { this->radius = radius; }
+    int width, height;
 
-    void setRadius(int radius) {
-        this->radius = radius;
-    }
+    Rectangle();
+    Rectangle(int w, int h);
+    Rectangle(int length);
 
-    double getArea() {
-        return 3.14 * radius * radius;
-    }
+    bool isSquare();
 };
 
-int main() {
-    Circle circle;
-    Circle& refc = circle;
+Rectangle::Rectangle() {
+    width = height = 1;
+}
 
-    refc.setRadius(10);
-    cout << refc.getArea() << " " << circle.getArea();
+Rectangle::Rectangle(int w, int h) {
+    width = w;
+    height = h;
+}
+
+Rectangle::Rectangle(int length) {
+    width = height = length;
+}
+
+bool Rectangle::isSquare() {
+    if (width == height) return true;
+    else return false;
+}
+
+int main() {
+    Rectangle rect1;
+    Rectangle rect2(3, 5);
+    Rectangle rect3(3);
+
+    if (rect1.isSquare()) cout << "rect1은 정사각형이다." << endl;
+    if (rect2.isSquare()) cout << "rect2는 정사각형이다." << endl;
+    if (rect3.isSquare()) cout << "rect3는 정사각형이다." << endl;
 }
