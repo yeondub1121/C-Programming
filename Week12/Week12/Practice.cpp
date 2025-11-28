@@ -2,33 +2,42 @@
 using namespace std;
 
 class Calculator {
+    void input() {
+        cout << "정수 2 개를 입력하세요>> ";
+        cin >> a >> b;
+    }
+
+protected:
+    int a, b;
+    virtual int calc(int a, int b) = 0;
+
 public:
-    virtual int add(int a, int b) = 0;
-    virtual int subtract(int a, int b) = 0;
-    virtual double average(int a[], int size) = 0;
+    void run() {
+        input();
+        cout << "계산된 값은 " << calc(a, b) << endl;
+    }
 };
 
-class GoodCalc : public Calculator {
-public:
-    int add(int a, int b) { return a + b; }
-    int subtract(int a, int b) { return a - b; }
+class Adder : public Calculator {
+protected:
+    int calc(int a, int b) {
+        return a + b;
+    }
+};
 
-    double average(int a[], int size) {
-        double sum = 0;
-        for (int i = 0; i < size; i++)
-            sum += a[i];
-        return sum / size;
+class Subtractor : public Calculator {
+protected:
+    int calc(int a, int b) {
+        return a - b;
     }
 };
 
 int main() {
-    int a[] = { 1, 2, 3, 4, 5 };
+    Adder adder;
+    Subtractor subtractor;
 
-    Calculator* p = new GoodCalc();
-    cout << p->add(2, 3) << endl;
-    cout << p->subtract(2, 3) << endl;
-    cout << p->average(a, 5) << endl;
+    adder.run();       // 덧셈 실행
+    subtractor.run();  // 뺄셈 실행
 
-    delete p;
     return 0;
 }
