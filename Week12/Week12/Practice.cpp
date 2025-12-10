@@ -1,43 +1,23 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-class Calculator {
-    void input() {
-        cout << "정수 2 개를 입력하세요>> ";
-        cin >> a >> b;
-    }
-
-protected:
-    int a, b;
-    virtual int calc(int a, int b) = 0;
-
-public:
-    void run() {
-        input();
-        cout << "계산된 값은 " << calc(a, b) << endl;
-    }
-};
-
-class Adder : public Calculator {
-protected:
-    int calc(int a, int b) {
-        return a + b;
-    }
-};
-
-class Subtractor : public Calculator {
-protected:
-    int calc(int a, int b) {
-        return a - b;
-    }
-};
-
 int main() {
-    Adder adder;
-    Subtractor subtractor;
+    vector<int> v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
 
-    adder.run();       // 덧셈 실행
-    subtractor.run();  // 뺄셈 실행
+    vector<int>::iterator it;
 
-    return 0;
+    for (it = v.begin(); it != v.end(); it++) {
+        int n = *it;
+        n = n * 2;
+        *it = n;
+    }
+
+    for (it = v.begin(); it != v.end(); it++)
+        cout << *it << ' ';
+
+    cout << endl;
 }
